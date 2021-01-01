@@ -1,8 +1,10 @@
 # TVK-Data-Tool
 ======================================================
+
 TVK Data Tool v1.2
 Copyright 2020, Han-Ting Lin. All rights reserved.
 November 2020
+
 ======================================================
 
 The TVK Data Tool software provides functions for cooperating the Temperature Verification Kit and Alpha model.. It takes the output .xls files from the software of t-View, and converts the data from temperature probes in to SeqGen temperature verification data table. 
