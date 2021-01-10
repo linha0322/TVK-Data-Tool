@@ -1,5 +1,5 @@
 # pyinstaller --onefile -w 'TVK Data Tool v1.2.py'
-# pyinstaller --onefile -w --icon=SG.ico 'TVK Data Tool v1.2.py'
+# pyinstaller --onedir -w --icon=SG.ico 'TVK Data Tool v1.2.py'
 # cd C:\SeqGen\Python\TVK
 import xlrd
 import pandas as pd
@@ -11,6 +11,7 @@ import time
 from tkinter import *
 from tkinter import filedialog
 from statistics import mean
+import os
 
 root=tk.Tk()
 root.geometry("430x150") # This is the windows size

@@ -12,6 +12,7 @@ import time
 from tkinter import *
 from tkinter import filedialog
 from statistics import mean
+import os
 
 timestr = time.strftime("%m%d%Y-%I%M%S%p")
 file_path_TNU=0
@@ -74,7 +75,15 @@ button['font'] = myFont
 root.mainloop()
 ############### Main data process #########################
 global f, TNU_94, TNU_60, fig, ax
-f= open("Temparature Log"+timestr+".txt","w+") # .txt file for the output
+d = os.path.dirname(__file__) # directory of script
+folder = os.path.join(d, 'Log')
+file_name = "Temparature Log"+timestr+".txt"
+file = os.path.join(folder, file_name)
+try:
+    os.makedirs(folder)
+except OSError:
+    pass
+f= open(file,"w+") # .txt file for the output # .txt file for the output
 # Fixing bug of non importing data
 try:
     file_path_45
@@ -207,13 +216,13 @@ def TNU_function(file_path_TNU):
     mylist1 = ["Average","TNU","Probe1 (A12)","Probe2 (H12)","Probe3 (C9)","Probe4 (F9)","Probe5 (C4)","Probe6 (F4)","Probe7 (A1)","Probe8 (H1)","Heated Cover"]
     if len(TNU_Data)>14:
         if TNU_Data[len(TNU_Data)-1][1] <70:
-            df = pd.DataFrame({"90(1)":TNU_Data[12][1:12],"94(2)":TNU_Data[len(TNU_Data)-2][1:12],"60(1)":TNU_Data[13][1:12],"60(2)":TNU_Data[len(TNU_Data)-1][1:12]},index = mylist1)
+            df = pd.DataFrame({"94(1)":TNU_Data[12][1:12],"94(2)":TNU_Data[len(TNU_Data)-2][1:12],"60(1)":TNU_Data[13][1:12],"60(2)":TNU_Data[len(TNU_Data)-1][1:12]},index = mylist1)
             df1 = df.round(2) # df round down to 2
             ax[1].table(cellText=df1.values, rowLabels = mylist1, colLabels=mylist, cellLoc ='center', loc='center')
             fig.tight_layout()
             ax[1].set_title('TNU Data Table')
         else:
-            df = pd.DataFrame({"90(1)":TNU_Data[12][1:12],"94(2)":TNU_Data[len(TNU_Data)-1][1:12],"60(1)":TNU_Data[13][1:12],"60(2)":TNU_Data[len(TNU_Data)-2][1:12]},index = mylist1)
+            df = pd.DataFrame({"94(1)":TNU_Data[12][1:12],"94(2)":TNU_Data[len(TNU_Data)-1][1:12],"60(1)":TNU_Data[13][1:12],"60(2)":TNU_Data[len(TNU_Data)-2][1:12]},index = mylist1)
             df1 = df.round(2) # df round down to 2
             ax[1].table(cellText=df1.values, rowLabels = mylist1, colLabels=mylist, cellLoc ='center', loc='center')
             fig.tight_layout()

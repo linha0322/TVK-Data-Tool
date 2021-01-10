@@ -12,6 +12,7 @@ import time
 from tkinter import *
 from tkinter import filedialog
 from statistics import mean
+import os
 
 timestr = time.strftime("%m%d%Y-%I%M%S%p")
 file_path_TNU=0
@@ -74,7 +75,15 @@ button['font'] = myFont
 root.mainloop()
 ############### Main data process #########################
 global f, TNU_94, TNU_60, fig, ax
-f= open("Temparature Log"+timestr+".txt","w+") # .txt file for the output
+d = os.path.dirname(__file__) # directory of script
+folder = os.path.join(d, 'Log')
+file_name = "Temparature Log"+timestr+".txt"
+file = os.path.join(folder, file_name)
+try:
+    os.makedirs(folder)
+except OSError:
+    pass
+f= open(file,"w+") # .txt file for the output # .txt file for the output
 # Fixing bug of non importing data
 try:
     file_path_45
